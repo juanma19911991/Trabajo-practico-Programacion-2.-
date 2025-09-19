@@ -1,0 +1,105 @@
+Clase Empleado.java
+
+public class Empleado {
+    // Atributos
+    private int id;
+    private String nombre;
+    private String puesto;
+    private double salario;
+
+    private static int totalEmpleados = 0;
+    private static int ultimoId = 0;
+
+    // Constructor con todos los atributos
+    public Empleado(int id, String nombre, String puesto, double salario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.puesto = puesto;
+        this.salario = salario;
+        totalEmpleados++;
+        if (id > ultimoId) {
+            ultimoId = id;
+        }
+    }
+
+    // Constructor solo con nombre y puesto
+    public Empleado(String nombre, String puesto) {
+        this.id = ++ultimoId;
+        this.nombre = nombre;
+        this.puesto = puesto;
+        this.salario = 50000; // salario por defecto
+        totalEmpleados++;
+    }
+
+    // Aumento de salario con porcentaje
+    public void actualizarSalario(double porcentaje) {
+        this.salario += this.salario * (porcentaje / 100);
+    }
+
+    // Aumento de salario con cantidad fija
+    public void actualizarSalario(int cantidad) {
+        this.salario += cantidad;
+    }
+
+    // Getters y Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getPuesto() { return puesto; }
+    public void setPuesto(String puesto) { this.puesto = puesto; }
+
+    public double getSalario() { return salario; }
+    public void setSalario(double salario) { this.salario = salario; }
+
+    public static int getTotalEmpleados() {
+        return totalEmpleados;
+    }
+
+    // toString para mostrar info del empleado
+    @Override
+    public String toString() {
+        return "Empleado [ID=" + id + ", Nombre=" + nombre + ", Puesto=" + puesto + ", Salario=" + salario + "]";
+    }
+
+    public static String mostrarTotalEmpleados() {
+        return "Total de empleados creados: " + totalEmpleados;
+    }
+}
+
+
+Clase de prueba Main.java
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Creo empleados con distintos constructores
+        Empleado e1 = new Empleado(1, "Ana Pérez", "Gerente", 80000);
+        Empleado e2 = new Empleado("Juan López", "Desarrollador");
+        Empleado e3 = new Empleado("Lucía Fernández", "Analista");
+
+        // Aumentos de salario
+        e2.actualizarSalario(10);     // aumento con porcentaje
+        e3.actualizarSalario(5000);   // aumento con monto fijo
+
+        // Mostrar info
+        System.out.println(e1);
+        System.out.println(e2);
+        System.out.println(e3);
+
+        // Mostrar total de empleados
+        System.out.println(Empleado.mostrarTotalEmpleados());
+    }
+}
+
+
+consola :
+Empleado [ID=1, Nombre=Ana Pérez, Puesto=Gerente, Salario=80000.0]
+Empleado [ID=2, Nombre=Juan López, Puesto=Desarrollador, Salario=55000.0]
+Empleado [ID=3, Nombre=Lucía Fernández, Puesto=Analista, Salario=55000.0]
+Total de empleados creados: 3
+
+
+

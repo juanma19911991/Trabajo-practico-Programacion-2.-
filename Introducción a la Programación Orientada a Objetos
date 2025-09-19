@@ -1,0 +1,203 @@
+1-Registro de Estudiantes
+
+public class Estudiante {
+    String nombre;
+    String apellido;
+    String curso;
+    double calificacion;
+
+    public void mostrarInfo() {
+        System.out.println(nombre + " " + apellido + " - Curso: " + curso + " - Nota: " + calificacion);
+    }
+
+    public void subirCalificacion(double puntos) {
+        calificacion += puntos;
+    }
+
+    public void bajarCalificacion(double puntos) {
+        calificacion -= puntos;
+    }
+}
+
+class TestEstudiante {
+    public static void main(String[] args) {
+        Estudiante e1 = new Estudiante();
+        e1.nombre = "Ana";
+        e1.apellido = "Pérez";
+        e1.curso = "POO";
+        e1.calificacion = 7;
+
+        e1.mostrarInfo();
+        e1.subirCalificacion(2);
+        e1.bajarCalificacion(1);
+        e1.mostrarInfo();
+    }
+}
+
+2-Registro de Mascotas
+
+public class Mascota {
+    String nombre;
+    String especie;
+    int edad;
+
+    public void mostrarInfo() {
+        System.out.println(nombre + " - " + especie + " - Edad: " + edad);
+    }
+
+    public void cumplirAnios() {
+        edad++;
+    }
+}
+
+class TestMascota {
+    public static void main(String[] args) {
+        Mascota m1 = new Mascota();
+        m1.nombre = "Firulais";
+        m1.especie = "Perro";
+        m1.edad = 3;
+
+        m1.mostrarInfo();
+        m1.cumplirAnios();
+        m1.mostrarInfo();
+    }
+}
+
+3-Encapsulamiento con la Clase Libro
+
+public class Libro {
+    private String titulo;
+    private String autor;
+    private int añoPublicacion;
+
+    public Libro(String titulo, String autor, int añoPublicacion) {
+        this.titulo = titulo;
+        this.autor = autor;
+        setAñoPublicacion(añoPublicacion);
+    }
+
+    public String getTitulo() { return titulo; }
+    public String getAutor() { return autor; }
+    public int getAñoPublicacion() { return añoPublicacion; }
+
+    public void setAñoPublicacion(int añoPublicacion) {
+        if (añoPublicacion > 0 && añoPublicacion <= 2025) {
+            this.añoPublicacion = añoPublicacion;
+        } else {
+            System.out.println("Año inválido, no se modificó.");
+        }
+    }
+
+    public void mostrarInfo() {
+        System.out.println("Libro: " + titulo + " - Autor: " + autor + " - Año: " + añoPublicacion);
+    }
+}
+
+class TestLibro {
+    public static void main(String[] args) {
+        Libro l1 = new Libro("1984", "George Orwell", 1949);
+        l1.mostrarInfo();
+        l1.setAñoPublicacion(3000); // inválido
+        l1.setAñoPublicacion(2020); // válido
+        l1.mostrarInfo();
+    }
+}
+
+
+4- Gestión de Gallinas
+
+public class Gallina {
+    int idGallina;
+    int edad;
+    int huevosPuestos;
+
+    public void ponerHuevo() {
+        huevosPuestos++;
+    }
+
+    public void envejecer() {
+        edad++;
+    }
+
+    public void mostrarEstado() {
+        System.out.println("Gallina " + idGallina + " - Edad: " + edad + " - Huevos: " + huevosPuestos);
+    }
+}
+
+class TestGallina {
+    public static void main(String[] args) {
+        Gallina g1 = new Gallina();
+        g1.idGallina = 1;
+        g1.edad = 2;
+
+        Gallina g2 = new Gallina();
+        g2.idGallina = 2;
+        g2.edad = 1;
+
+        g1.envejecer();
+        g1.ponerHuevo();
+        g1.mostrarEstado();
+
+        g2.ponerHuevo();
+        g2.ponerHuevo();
+        g2.mostrarEstado();
+    }
+}
+
+5- Simulación de Nave Espacial
+
+public class NaveEspacial {
+    String nombre;
+    int combustible;
+    int maxCombustible = 100;
+
+    public NaveEspacial(String nombre, int combustible) {
+        this.nombre = nombre;
+        this.combustible = combustible;
+    }
+
+    public void despegar() {
+        if (combustible >= 10) {
+            combustible -= 10;
+            System.out.println(nombre + " despegó!");
+        } else {
+            System.out.println("Combustible insuficiente para despegar.");
+        }
+    }
+
+    public void avanzar(int distancia) {
+        int consumo = distancia * 2;
+        if (combustible >= consumo) {
+            combustible -= consumo;
+            System.out.println(nombre + " avanzó " + distancia + " km.");
+        } else {
+            System.out.println("No hay suficiente combustible para avanzar.");
+        }
+    }
+
+    public void recargarCombustible(int cantidad) {
+        if (combustible + cantidad <= maxCombustible) {
+            combustible += cantidad;
+            System.out.println("Recargados " + cantidad + " de combustible.");
+        } else {
+            System.out.println("No se puede superar el límite de " + maxCombustible);
+        }
+    }
+
+    public void mostrarEstado() {
+        System.out.println("Nave: " + nombre + " - Combustible: " + combustible);
+    }
+}
+
+class TestNave {
+    public static void main(String[] args) {
+        NaveEspacial nave = new NaveEspacial("Apollo", 50);
+        nave.mostrarEstado();
+
+        nave.avanzar(20); // no alcanza
+        nave.recargarCombustible(30);
+        nave.despegar();
+        nave.avanzar(10);
+        nave.mostrarEstado();
+    }
+}
